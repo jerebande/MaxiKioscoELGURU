@@ -128,7 +128,7 @@
   }
   .hero-art img{border-radius:22px;}
   .hero-art .badge{
-    position:absolute; top:-16px; right:-4px;
+    position:absolute; top:-16px; right:-4px; z-index:3;
     background:var(--white); color:var(--navy);
     font-family:'Baloo 2',sans-serif; font-weight:700;
     font-size:0.95rem; padding:10px 16px; border-radius:16px;
@@ -140,6 +140,10 @@
     .hero-grid{grid-template-columns:1fr; text-align:left;}
     .hero-art{order:-1; margin-bottom:8px;}
     .hero-art .plate{max-width:220px;}
+    .hero-art .badge{
+      font-size:0.78rem; padding:8px 12px; right:2px; top:-10px;
+      max-width:150px; line-height:1.25; text-align:center;
+    }
   }
 
   /* ---------- section headers ---------- */
@@ -251,10 +255,14 @@
   /* ---------- footer ---------- */
   footer{background:var(--navy-2); padding:44px 0 34px;}
   .foot-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+  @media (max-width:560px){
+    .foot-grid{justify-content:center; text-align:center;}
+    .foot-links{justify-content:center;}
+  }
   .foot-brand{display:flex; align-items:center; gap:12px;}
   .foot-brand img{width:44px; height:44px; border-radius:50%; border:2px solid var(--yellow);}
   .foot-brand span{color:var(--white); font-family:'Baloo 2',sans-serif; font-weight:700;}
-  .foot-links{display:flex; gap:20px;}
+  .foot-links{display:flex; gap:20px; flex-wrap:wrap; justify-content:flex-end;}
   .foot-links a{color:#B9BEE0; font-weight:700; font-size:0.9rem;}
   .foot-note{color:#7C82AE; font-size:0.82rem; font-weight:600; margin-top:26px; text-align:center;}
 
@@ -324,7 +332,6 @@
       </div>
       <div class="hero-meta">
         <div><strong>08 – 00:30</strong>Abierto todos los días</div>
-        <div><strong>15-20 min</strong>Entrega por WhatsApp</div>
         <div><strong>+150</strong>Productos en el mostrador</div>
       </div>
     </div>
@@ -342,38 +349,7 @@
       <h2>Todo lo que buscás, a mano</h2>
       <p>Un vistazo rápido a las categorías fuertes del kiosco. Consultanos stock y precio de cualquier producto por WhatsApp antes de venir.</p>
     </div>
-    <div class="prod-grid">
-      <div class="prod-card">
-        <span class="emoji">🌭</span>
-        <h3>Panchos y minutas</h3>
-        <p>Panchos al toque con toda la salsa, hamburguesas y algo calentito para cualquier hora.</p>
-      </div>
-      <div class="prod-card">
-        <span class="emoji">🍬</span>
-        <h3>Golosinas y snacks</h3>
-        <p>Caramelos, chocolates, papas fritas y todo lo dulce y salado para el antojo del momento.</p>
-      </div>
-      <div class="prod-card">
-        <span class="emoji">🥤</span>
-        <h3>Bebidas y gaseosas</h3>
-        <p>Gaseosas, aguas, jugos y cerveza bien fría, lista para llevar.</p>
-      </div>
-      <div class="prod-card">
-        <span class="emoji">🥖</span>
-        <h3>Almacén y fiambres</h3>
-        <p>Pan, fiambres, lácteos y esos productos que faltan justo cuando más se necesitan.</p>
-      </div>
-      <div class="prod-card">
-        <span class="emoji">🚬</span>
-        <h3>Cigarrillos</h3>
-        <p>Las marcas de siempre, disponibles todos los días hasta la madrugada.</p>
-      </div>
-      <div class="prod-card">
-        <span class="emoji">🧊</span>
-        <h3>Hielo y varios</h3>
-        <p>Hielo, pilas, encendedores y esos imprevistos de último momento.</p>
-      </div>
-    </div>
+    <div class="prod-grid" id="prod-grid"></div>
   </div>
 </section>
 
@@ -384,23 +360,7 @@
       <h2>Las promos de la semana</h2>
       <p>Cambian seguido — confirmá la vigente cuando escribas por WhatsApp.</p>
     </div>
-    <div class="promo-row">
-      <div class="promo-card">
-        <span class="tag">COMBO</span>
-        <h3>Pancho + gaseosa</h3>
-        <p>Pancho completo con papas fritas y gaseosa línea Coca-Cola de 500ml.</p>
-      </div>
-      <div class="promo-card">
-        <span class="tag">2X1</span>
-        <h3>Gaseosas 1,5L</h3>
-        <p>Llevate dos gaseosas de litro y medio al precio de una, todos los días.</p>
-      </div>
-      <div class="promo-card">
-        <span class="tag">NOCHE</span>
-        <h3>After 22hs</h3>
-        <p>10% off en golosinas y snacks pidiendo por WhatsApp después de las 22.</p>
-      </div>
-    </div>
+    <div class="promo-row" id="promo-row"></div>
   </div>
 </section>
 
@@ -489,5 +449,76 @@
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.13.82.84-3.05-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.55 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31s-.87.86-.87 2.08.9 2.41 1.02 2.58c.12.17 1.75 2.67 4.26 3.73.6.25 1.06.4 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.28s-1.47-.72-1.7-.81c-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.98-.15.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.36-.78-1.85-.2-.48-.4-.42-.56-.42h-.47Z"/></svg>
 </a>
 
+<script>
+/* ============================================================
+   CATÁLOGO DEL KIOSCO — editá acá para agregar/quitar/cambiar
+   productos y promos. No hace falta tocar nada más del archivo.
+
+   Cada producto es un bloque { }, separado por coma:
+     emoji:       un solo emoji, entre comillas
+     titulo:      nombre de la categoría o producto
+     descripcion: una frase corta
+
+   Para AGREGAR uno nuevo: copiá un bloque completo (desde { hasta
+   la }, con la coma), pegalo antes del ] de cierre, y cambiá los
+   textos.
+   Para BORRAR uno: borrá su bloque completo (desde { hasta la
+   } y la coma que le sigue).
+   ============================================================ */
+const PRODUCTOS = [
+  { emoji: "🌭", titulo: "Panchos y minutas", descripcion: "Panchos al toque con toda la salsa, hamburguesas y algo calentito para cualquier hora." },
+  { emoji: "🍬", titulo: "Golosinas y snacks", descripcion: "Caramelos, chocolates, papas fritas y todo lo dulce y salado para el antojo del momento." },
+  { emoji: "🥤", titulo: "Bebidas y gaseosas", descripcion: "Gaseosas, aguas, jugos y cerveza bien fría, lista para llevar." },
+  { emoji: "🥖", titulo: "Almacén y fiambres", descripcion: "Pan, fiambres, lácteos y esos productos que faltan justo cuando más se necesitan." },
+  { emoji: "🚬", titulo: "Cigarrillos", descripcion: "Las marcas de siempre, disponibles todos los días hasta la madrugada." },
+  { emoji: "🧊", titulo: "Hielo y varios", descripcion: "Hielo, pilas, encendedores y esos imprevistos de último momento." },
+];
+
+/* ============================================================
+   PROMOCIONES DE LA SEMANA — mismo criterio que arriba.
+     etiqueta:    texto corto tipo "COMBO", "2X1", "NOCHE"
+     titulo:      nombre de la promo
+     descripcion: en qué consiste
+   ============================================================ */
+const PROMOS = [
+  { etiqueta: "COMBO", titulo: "Pancho + gaseosa", descripcion: "Pancho completo con papas fritas y gaseosa línea Coca-Cola de 500ml." },
+  { etiqueta: "2X1", titulo: "Gaseosas 1,5L", descripcion: "Llevate dos gaseosas de litro y medio al precio de una, todos los días." },
+  { etiqueta: "NOCHE", titulo: "After 22hs", descripcion: "10% off en golosinas y snacks pidiendo por WhatsApp después de las 22." },
+];
+
+/* A partir de acá se arma la página sola — no hace falta editar. */
+function escaparHTML(texto){
+  const div = document.createElement("div");
+  div.textContent = texto;
+  return div.innerHTML;
+}
+
+function renderProductos(){
+  const cont = document.getElementById("prod-grid");
+  if(!cont) return;
+  cont.innerHTML = PRODUCTOS.map(p => `
+    <div class="prod-card">
+      <span class="emoji">${escaparHTML(p.emoji)}</span>
+      <h3>${escaparHTML(p.titulo)}</h3>
+      <p>${escaparHTML(p.descripcion)}</p>
+    </div>
+  `).join("");
+}
+
+function renderPromos(){
+  const cont = document.getElementById("promo-row");
+  if(!cont) return;
+  cont.innerHTML = PROMOS.map(p => `
+    <div class="promo-card">
+      <span class="tag">${escaparHTML(p.etiqueta)}</span>
+      <h3>${escaparHTML(p.titulo)}</h3>
+      <p>${escaparHTML(p.descripcion)}</p>
+    </div>
+  `).join("");
+}
+
+renderProductos();
+renderPromos();
+</script>
 </body>
 </html>
